@@ -15,4 +15,18 @@
     package: "{{ item }}"
     state: present
     with_items:
-      - "{{ required_packages }}"
+       - "mysql-server"
+       - "postfix"
+       - "postfix-mysql"
+       - "dovecot-core"
+       - "dovecot-imapd"
+       - "dovecot-lmtpd"
+       - "dovecot-mysql"
+       - "opendkim"
+       - "opendkim-tools"
+
+- name: Installing certbot from jessie-backports
+  apt:
+    packge: certbot
+    state: present
+    default_release: jessie-backports
