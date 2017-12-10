@@ -1,0 +1,34 @@
+- name: Creating MySQL database
+  mysql_db:
+    name: mail
+    login_user: root
+ 
+- name: Creating MySQL user
+  mysql_user:
+    login_user: root
+    name: mail
+    priv: mail.*:ALL
+
+- name: Creating MySQL Tables (1/2)
+  template:
+    src: createTables.sql.j2
+    dest: /tmp/createTables.sql
+    
+- name: Creating MySQL Tables (2/2)
+  mysql_db:
+    login_user: root
+    name: mail
+    state: import
+    target: /tmp/createTables.sql
+
+- name: Inserting data into the MySQL Tables (1/2)
+  template:
+    src: insertData.sql.j2
+    dest: /tmp/insertData.sql
+
+- name: Inserting data into the MySQL Tables (2/2)
+  mysql_db:
+    login_user: root
+    name: mail
+    state: import
+    target: /tmp/insertData.sql
