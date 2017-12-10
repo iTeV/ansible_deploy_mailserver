@@ -1,0 +1,2 @@
+- name: Aquiring SSL Certificates
+  shell: certbot certonly --standalone -d "{{ domain }}"
