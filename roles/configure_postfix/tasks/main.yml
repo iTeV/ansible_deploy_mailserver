@@ -1,0 +1,34 @@
+- name: Configuring postfix (1/5)
+  template:
+    src: main.cf.j2
+    dest: /etc/postfix/main.cf
+
+- name: Configuring postfix (2/5)
+  template:
+    src: mysql-virtual-email2email.cf.j2
+    dest: /etc/postfix/mysql-virtual-email2email.cf
+
+- name: Configuring postfix (3/5)
+  template:
+    src: mysql-virtual-mailbox-maps.cf.j2
+    dest: /etc/postfix/mysql-virtual-mailbox-maps.cf
+
+- name: Configuring postfix (4/5)
+  template:
+    src: mysql-virtual-alias-maps.cf.j2
+    dest: /etc/postfix/mysql-virtual-alias-maps.cf
+
+- name: Configuring postfix (5/5)
+  template:
+    src: mysql-virtual-mailbox-domains.cf.j2
+    dest: /etc/postfix/mysql-virtual-mailbox-domains.cf.j2
+
+- name: Restarting postfix
+  notify: restart postfix
+
+- name: Checking if the postfix is valid
+  shell: "postmap -q {{ mail_user }}@{{ domain }} mysql:/etc/postfix/mysql-virtual-mailbox-maps.cf"
+  register: postmap_status
+  fail:
+    msg: "Uh-oh! Something went wrong! Please check the postfix configuration manually"
+  when: postmap_status.stdout == 0

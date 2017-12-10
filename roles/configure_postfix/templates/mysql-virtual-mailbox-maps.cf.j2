@@ -1,0 +1,6 @@
+user = mail
+password = {{ mysql_user_password }}
+hosts = 127.0.0.1
+dbname = mail
+query = SELECT 1 FROM virtual_users WHERE EMAIL ='%s'
+
