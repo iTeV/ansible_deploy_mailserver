@@ -1,0 +1,55 @@
+!include_try /usr/share/dovecot/protocols.d/*.protocol
+protocols = imap lmtp
+postmaster_address=postmaster@{{ mail_domain }}
+
+service imap-login {
+  inet_listener imap {
+    port = 0
+  }
+}
+service lmtp {
+   unix_listener /var/spool/postfix/private/dovecot-lmtp {
+           mode = 0600
+           user = postfix
+           group = postfix
+   }
+}
+service auth {
+
+  unix_listener /var/spool/postfix/private/auth {
+  mode = 0666
+  user = postfix
+  group = postfix
+  }
+
+  unix_listener auth-userdb {
+  mode = 0600
+  user = {{ mail_domain }}
+  #group =
+  }
+
+  #unix_listener /var/spool/postfix/private/auth {
+  # mode = 0666
+  #}
+
+  user = dovecot
+}
+service auth-worker {
+  user = {{ mail_domain }}
+}
+
+disable_plaintext_auth = yes
+auth_mechanisms = plain login
+ssl = required
+ssl_cert = </etc/letsencrypt/live/{{ mail_domain }}/fullchain.pem
+ssl_key = </etc/letsencrypt/live/{{ mail_domain }}/privkey.pem
+
+mail_location = maildir:/home/{{ mail_domain }}/mail/%d/%n
+mail_privileged_group = {{ mail_domain }}
+passdb {
+  driver = sql
+ args = /etc/dovecot/dovecot-sql.conf.ext
+}
+userdb {
+  driver = static
+  args = uid={{ mail_domain }} gid={{ mail_domain }} home=/home/{{ mail_domain }}/mail/%d/%n
