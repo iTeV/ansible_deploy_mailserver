@@ -1,0 +1,11 @@
+- name: Creating user for dovecot
+  user:
+    add: {{ mail_domain }}
+    createhome: yes
+    comment: "User account for dovecot operations
+
+- name: Configuring dovecot.conf
+  template:
+    src: dovecot.conf
+    dest: /etc/dovecot/dovecot.conf
+
