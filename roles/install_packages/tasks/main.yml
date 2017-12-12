@@ -12,6 +12,7 @@
     package: "{{ item }}"
     state: present
   with_items:
+    - "python-pip"
     - "mysql-server"
     - "postfix"
     - "postfix-mysql"
