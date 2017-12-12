@@ -31,3 +31,8 @@
 - fail:
     msg: "Uh-oh! Something went wrong! Please check the postfix configuration manually"
   when: postmap_status.stdout == 0
+
+- name: Configuring master.cf (Postfix)
+  template:
+    src: master.cf.j2
+    dest: /etc/postfix/master.cf
