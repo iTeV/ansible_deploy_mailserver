@@ -16,6 +16,10 @@
         prompt: "Enter the domainname for the mailserver"
         private: false
 
+      - name: mail_sub_domain
+        prompt: "Enter the subdomain to use for the mailserver"
+        private: false
+
       - name: mail_user
         prompt: "Enter the user that is gonna use the mailserver"
         private: false
