@@ -1,9 +1,6 @@
 - name: Updating package list
   apt:
-    update_cache: yes
-  fail:
-    msg: "Target system is not debian based!"
-  when: ansible_os_family == "Debian"
+      update_cache: yes
 
 - name: Adding jessie-backports repo
   apt_repository:
@@ -14,19 +11,25 @@
   apt:
     package: "{{ item }}"
     state: present
-    with_items:
-       - "mysql-server"
-       - "postfix"
-       - "postfix-mysql"
-       - "dovecot-core"
-       - "dovecot-imapd"
-       - "dovecot-lmtpd"
-       - "dovecot-mysql"
-       - "opendkim"
-       - "opendkim-tools"
+  with_items:
+    - "mysql-server"
+    - "postfix"
+    - "postfix-mysql"
+    - "dovecot-core"
+    - "dovecot-imapd"
+    - "dovecot-lmtpd"
+    - "dovecot-mysql"
+    - "opendkim"
+    - "opendkim-tools"
+    - "libmysqlclient-dev"
+    - "python-dev"
+
+- name: installing required pip modules
+  pip:
+    name: mysql-python
 
 - name: Installing certbot from jessie-backports
   apt:
-    packge: certbot
+    package: certbot
     state: present
     default_release: jessie-backports

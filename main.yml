@@ -1,5 +1,36 @@
 ---
 - name: This playbook is used to deploy a fully functional mailserver including DKIM records
-  hosts: -
+  hosts: all
+  vars_prompt:
+      - name: mysql_user
+        private: false
+        prompt: "Enter the name of the new MySQL user"
+      
+      - name: mysql_user_password
+        prompt: "Enter the password for the new MySQL user"
+
+      - name: mysql_user_password_verify
+        prompt: "Re-enter the password for the new MySQL user"
+
+      - name: mail_domain
+        prompt: "Enter the domainname for the mailserver"
+        private: false
+
+      - name: mail_user
+        prompt: "Enter the user that is gonna use the mailserver"
+        private: false
+    
+      - name: mail_user_password
+        prompt: "Enter the password for the new user"
+
+      - name: mail_user_password_verify
+        prompt: "Re-enter the password for the new user"
+
+
+  become: true
   roles:
+      - check_options
+      - install_packages
+      - configure_mysql
+      - configure_postfix
 

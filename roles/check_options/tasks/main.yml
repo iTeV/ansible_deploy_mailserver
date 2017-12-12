@@ -1,0 +1,22 @@
+- name: Checking if the user didnt fill the required fields
+  fail:
+      msg: "You did not enter all the fields!"
+  when: item == ""
+  with_items:
+      - "{{ mysql_user }}"
+      - "{{ mysql_user_password }}"
+      - "{{ mysql_user_password_verify }}"
+      - "{{ mail_domain }}"
+      - "{{ mail_user }}"
+      - "{{ mail_user_password }}"
+      - "{{ mail_user_password_verify }}"
+
+- name: Checking if the MySQL passwords do match
+  fail:
+      msg: "MySQL passwords do not match!"
+  when: mysql_user_password != mysql_user_password_verify
+
+- name: Checking if the mailuser passwords do match
+  fail:
+      msg: "The passwords for {{ mail_user }} do not match!"
+  when: mail_user_password != mail_user_password_verify

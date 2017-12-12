@@ -22,13 +22,12 @@
   template:
     src: mysql-virtual-mailbox-domains.cf.j2
     dest: /etc/postfix/mysql-virtual-mailbox-domains.cf.j2
-
-- name: Restarting postfix
   notify: restart postfix
 
 - name: Checking if the postfix is valid
-  shell: "postmap -q {{ mail_user }}@{{ domain }} mysql:/etc/postfix/mysql-virtual-mailbox-maps.cf"
+  shell: "postmap -q {{ mail_user }}@{{ mail_domain }} mysql:/etc/postfix/mysql-virtual-mailbox-maps.cf"
   register: postmap_status
-  fail:
+  
+- fail:
     msg: "Uh-oh! Something went wrong! Please check the postfix configuration manually"
   when: postmap_status.stdout == 0
