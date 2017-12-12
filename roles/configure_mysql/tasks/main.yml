@@ -6,7 +6,7 @@
 - name: Creating MySQL user
   mysql_user:
     login_user: root
-    name: {{ mysql_user }}
+    name: "{{ mysql_user }}"
     priv: mail.*:ALL
 
 - name: Creating MySQL Tables (1/2)
