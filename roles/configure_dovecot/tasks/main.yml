@@ -1,6 +1,6 @@
 - name: Creating user for dovecot
   user:
-    add: {{ mail_domain }}
+    name: "{{ mail_domain }}"
     createhome: yes
     comment: "User account for dovecot operations"
 
@@ -9,10 +9,10 @@
     src: dovecot.conf
     dest: /etc/dovecot/dovecot.conf
 
-- name: Creating directories:
-    file:
-        path: "/home/{{ mail_domain }}/{{ item }}"
-        state: directory
+- name: Creating directories
+  file:
+    path: "/home/{{ mail_domain }}/{{ item }}"
+    state: directory
   with_items:
       - "mail"
       - "mail/{{ mail_domain }}"
