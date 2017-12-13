@@ -1,5 +1,2 @@
 - name: Aquiring SSL Certificates
-  shell: certbot certonly --standalone -d "{{ domain }}"
-  register: certbot_status
-  fail:
-    msg: "Failed to install certbot: {{ certbot_status.stderr }}
+  shell: certbot certonly --standalone -d "{{ domain }}" --agree-tos -m "{{ letsencrypt_mail }}"
