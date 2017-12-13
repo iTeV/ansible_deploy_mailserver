@@ -8,7 +8,7 @@
       
       - name: mysql_user_password
         prompt: "Enter the password for the new MySQL user"
-
+      
       - name: mysql_user_password_verify
         prompt: "Re-enter the password for the new MySQL user"
 
@@ -37,4 +37,5 @@
       - install_packages
       - configure_mysql
       - configure_postfix
+      - { role: configure_dovecot, tags: [ 'dovecot' ]}
 
