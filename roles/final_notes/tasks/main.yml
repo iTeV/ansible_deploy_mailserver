@@ -1,0 +1,4 @@
+- name: Message
+  debug:
+      msg:
+          - "You're mailserver is almost ready to go! There are a few points that ansible cant do. One of these points is creating a subdomain called 'mail._domainkey' in the DNS control panel. Create a TXT record for the 'mail._domainkey' subdomain with the following contents: {{ gen_opendkim }}. After you have done this create another subdomain called {{ mail_sub_domain }}. Create a MX record for this subdomain with the following contents: '10 {{ mail_sub_domain}}.{{ mail_domain }}'. The other thing to make sure is to check if the mailserver can be reached from the internet. That means that if you are on a NAT network, you need to forward the following ports (TCP): 25, 465, 587 & 993. If you using a VPS from a VPS provider, make sure to create firewall rules to allow the previously mentioned ports."
