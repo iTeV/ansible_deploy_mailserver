@@ -24,3 +24,9 @@
       src: Trustedhosts.j2
       dest: /etc/opendkim/TrustedHosts
 
+- name: Configuring openDKIM KeyTable
+  template:
+      src: KeyTable.j2
+      dest: /etc/opendkim/KeyTable
+
+
