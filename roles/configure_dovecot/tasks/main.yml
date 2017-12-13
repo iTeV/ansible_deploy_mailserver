@@ -16,3 +16,12 @@
   with_items:
       - "mail"
       - "mail/{{ mail_domain }}"
+
+- name: Fixing permissions on directories
+  file:
+      path: "/home/{{ mail_domain }}/mail"
+      owner: "{{ mail_domain }}"
+      group: "{{ mail_domain }}"
+      state: directory
+      recurse: yes
+
