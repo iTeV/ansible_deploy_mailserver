@@ -29,4 +29,14 @@
       src: KeyTable.j2
       dest: /etc/opendkim/KeyTable
 
+- name: Creating opendkim keys folder
+  file:
+      path: "/etc/opendkim/{{ item }}"
+      state: directory
 
+  with_items:
+      - "keys"
+      - "keys/{{ mail_domain }}"
+
+- name: Generating OpenDKIM Keys
+  shell: "opendkim-genkey -s mail -d {{ mail_domain }} --directory=/etc/opendkim/keys/{{ mail_domain}}/"
