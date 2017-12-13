@@ -1,0 +1,19 @@
+---
+- name: Configuring opendkim.conf
+  template:
+      src: opendkim.conf.j2
+      dest: /etc/opendkim.conf
+
+- name: Editing /etc/default/opendkim
+
+
+
+- name: Creating openDKIM directories
+  file:
+      path: "/etc/{{ item }}"
+      state: directory
+  with_items:
+      - "opendkim"
+      - "opendkim/keys/"
+      - "opendkim/keys/{{ mail_domain }}"
+
