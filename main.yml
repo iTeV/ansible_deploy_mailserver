@@ -21,7 +21,7 @@
         private: false
 
       - name: mail_user
-        prompt: "Enter the user that is gonna use the mailserver"
+        prompt: "Enter the user that is going to use the mailserver"
         private: false
     
       - name: mail_user_password
@@ -31,6 +31,7 @@
         prompt: "Re-enter the password for the new user"
 
       - name: letsencrypt_mail
+        private: false
         prompt: "Enter the email that will be used for lets encrypt notifications"
 
 
@@ -42,6 +43,6 @@
       - configure_postfix
       - configure_dovecot
       - configure_opendkim
-        # - configure_letsencrypt
+      - configure_letsencrypt
       - final_notes
 
