@@ -30,6 +30,9 @@
       - name: mail_user_password_verify
         prompt: "Re-enter the password for the new user"
 
+      - name: letsencrypt_mail
+        prompt: "Enter the email that will be used for lets encrypt notifications"
+
 
   become: true
   roles:
@@ -39,4 +42,5 @@
       - configure_postfix
       - configure_dovecot
       - configure_opendkim
+      - configure_letsencrypt
 
