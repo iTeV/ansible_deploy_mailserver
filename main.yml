@@ -37,5 +37,6 @@
       - install_packages
       - configure_mysql
       - configure_postfix
-      - { role: configure_dovecot, tags: [ 'dovecot' ]}
+      - configure_dovecot
+      - configure_opendkim
 
