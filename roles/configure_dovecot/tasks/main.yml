@@ -40,7 +40,7 @@
 
 - name: Fixing permissions on dovecot daemon
   file:
-      path: "/var/run/dovecot/auh-userdb"
+      path: "/var/run/dovecot/auth-userdb"
       state: file
       owner: "{{ mail_domain }}"
       group: "dovecot"
