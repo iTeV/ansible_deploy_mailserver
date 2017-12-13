@@ -1,2 +1,12 @@
+- name: Warning!
+  debug:
+      msg:
+          - "WARNING! Make sure to disable all applications that use port 443/TCP! If there is still a application/service running on that port, make sure to disable it! The deployment of the mailserver will otherwise fail."
+
+- name: "Pausing the task, giving the user the time to disable any application/service running on port 443/tcp. Task will continue in 2 minutes. Press Control + C to skip the timer"
+  pause:
+    minutes: 2
+
+
 - name: Aquiring SSL Certificates
   shell: certbot certonly --standalone -d "{{ domain }}" --agree-tos -m "{{ letsencrypt_mail }}"

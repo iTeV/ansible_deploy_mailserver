@@ -40,6 +40,9 @@
 
 - name: Generating OpenDKIM Keys
   shell: "opendkim-genkey -s mail -d {{ mail_domain }} --directory=/etc/opendkim/keys/{{ mail_domain}}/"
+
+- name: Getting the DKIM Key
+  shell: "cat /etc/opendkim/keys/{{ mail_domain }}/mail.txt"
   register: gen_opendkim
 
 - name: Fixing permissions for mail.private (OpenDKIM)
@@ -48,4 +51,5 @@
       owner: opendkim
       group: opendkim
       state: file
+
 
