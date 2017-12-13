@@ -5,8 +5,10 @@
       dest: /etc/opendkim.conf
 
 - name: Editing /etc/default/opendkim
-
-
+  lineinfile:
+      path: /etc/default/opendkim
+      line: 'SOCKET="inet:12301@localhost"'
+      state: present
 
 - name: Creating openDKIM directories
   file:
@@ -16,4 +18,9 @@
       - "opendkim"
       - "opendkim/keys/"
       - "opendkim/keys/{{ mail_domain }}"
+
+- name: Configuring openDKIM TrustedHosts
+  template:
+      src: Trustedhosts.j2
+      dest: /etc/opendkim/TrustedHosts
 
