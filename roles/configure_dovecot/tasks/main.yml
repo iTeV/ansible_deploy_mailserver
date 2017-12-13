@@ -17,7 +17,7 @@
       - "mail"
       - "mail/{{ mail_domain }}"
 
-- name: Fixing permissions on directories
+- name: Fixing permissions on home directory
   file:
       path: "/home/{{ mail_domain }}/mail"
       owner: "{{ mail_domain }}"
@@ -25,3 +25,23 @@
       state: directory
       recurse: yes
 
+- name: Configuring dovecot-sql.conf.ext
+  template:
+      src: dovecot-sql.conf.ext.j2
+      dest: /etc/dovecot/dovecot-sql.conf.ext.j2
+
+- name: Fixing permissions on dovecot directories
+  file:
+      path: "/etc/dovecot"
+      owner: "{{ mail_domain }}"
+      group: "dovecot"
+      state: directory
+      recurse: yes
+
+- name: Fixing permissions on dovecot daemon
+  file:
+      path: "/var/run/dovecot/auh-userdb"
+      state: file
+      owner: "{{ mail_domain }}"
+      group: "dovecot"
+  notify: restart dovecot
