@@ -9,4 +9,4 @@
 
 
 - name: Aquiring SSL Certificates
-  shell: certbot certonly --standalone -d "{{ domain }}" --agree-tos -m "{{ letsencrypt_mail }}"
+  shell: certbot certonly --standalone -d "{{ mail_domain }}" --agree-tos -m "{{ letsencrypt_mail }}"
