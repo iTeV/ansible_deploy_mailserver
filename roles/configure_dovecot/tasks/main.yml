@@ -6,7 +6,7 @@
 
 - name: Configuring dovecot.conf
   template:
-    src: dovecot.conf
+    src: dovecot.conf.j2
     dest: /etc/dovecot/dovecot.conf
 
 - name: Creating directories
