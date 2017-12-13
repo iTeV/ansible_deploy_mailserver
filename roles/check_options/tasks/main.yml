@@ -10,6 +10,7 @@
       - "{{ mail_user }}"
       - "{{ mail_user_password }}"
       - "{{ mail_user_password_verify }}"
+      - "{{ letsencrypt_email }}"
 
 - name: Checking if the MySQL passwords do match
   fail:
