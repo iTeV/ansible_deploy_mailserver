@@ -21,7 +21,7 @@
 - name: Configuring postfix (5/5)
   template:
     src: mysql-virtual-mailbox-domains.cf.j2
-    dest: /etc/postfix/mysql-virtual-mailbox-domains.cf.j2
+    dest: /etc/postfix/mysql-virtual-mailbox-domains.cf
   notify: restart postfix
 
 - name: Checking if the postfix is valid
