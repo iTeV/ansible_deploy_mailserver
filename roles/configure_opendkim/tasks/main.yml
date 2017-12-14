@@ -29,6 +29,12 @@
       src: KeyTable.j2
       dest: /etc/opendkim/KeyTable
 
+- name: Configuring openDKIM signingtable
+  template:
+      src: SigningTable.j2
+      dest: /etc/opendkim/SigningTable
+
+
 - name: Creating opendkim keys folder
   file:
       path: "/etc/opendkim/{{ item }}"
