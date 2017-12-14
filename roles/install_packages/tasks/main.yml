@@ -29,8 +29,21 @@
   pip:
     name: mysql-python
 
-- name: Installing certbot from jessie-backports
+- name: Installing certbot from jessie-backports (debian)
   apt:
     package: certbot
     state: present
     default_release: jessie-backports
+  when: ansible_distribution == "Debian"
+
+- name: Installig certbot for PPA (ubuntu)
+  apt_repository:
+      repo: ppa:certbot/certbot
+      update_cache: true
+  when: ansible_distribution == "Ubuntu"
+
+- name: Installing certbot from PPA (ubuntu)
+  apt:
+      name: certbot
+      state: installed
+  when: ansible_distribution == "Ubuntu"
