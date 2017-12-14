@@ -37,12 +37,12 @@
 
   become: true
   roles:
-      - check_options
-      - install_packages
-      - configure_mysql
-      - configure_postfix
-      - configure_dovecot
-      - configure_opendkim
-      - configure_letsencrypt
-      - final_notes
+      - { role: check_options, tags: ['check'] }
+      - { role: install_packages, tags: ['install'] }
+      - { role: configure_mysql, tags: ['conf_mysql'] }
+      - { role: configure_postfix, tags: ['conf_postfix'] }
+      - { role: configure_dovecot, tags: ['conf_dovecot'] }
+      - { role: configure_opendkim, tags: ['conf_opendkim'] }
+      - { role: configure_letsencrypt, tags: ['conf_letsencrypt'] }
+      - { role: final_notes, tags: ['final_notes'] }
 
