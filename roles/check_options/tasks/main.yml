@@ -1,4 +1,5 @@
 - name: Checking if the user didnt fill the required fields
+  no_log: true
   fail:
       msg: "You did not enter all the fields!"
   when: item == ""
